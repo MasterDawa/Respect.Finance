@@ -448,7 +448,7 @@ contract USDCReceiver is Ownable {
     }
 }
 
-contract respectct is ERC20Detailed, Ownable {
+contract Respect is ERC20Detailed, Ownable {
 
     using SafeMath for uint256;
     using SafeMathInt for int256;
@@ -456,8 +456,8 @@ contract respectct is ERC20Detailed, Ownable {
     event LogRebase(uint256 indexed epoch, uint256 totalSupply);
     event SwapEnabled();
 
-    string public _name = "respect Finance";
-    string public _symbol = "respect
+    string public _name = "Respect Finance";
+    string public _symbol = "RSPCT";
     uint8 public _decimals = 5;
 
     IPancakeSwapPair public pairContract;
@@ -479,11 +479,11 @@ contract respectct is ERC20Detailed, Ownable {
 
     uint256 public liquidityFee = 50;
     uint256 public treasuryFee = 30;
-    uint256 public respInsuranceFundFee = 50;
+    uint256 public rspctInsuranceFundFee = 50;
     uint256 public sellFee = 20;
     uint256 public blackholeFee = 10;
     uint256 public nftFee = 20;
-    uint256 public totalFee = liquidityFee.add(treasuryFee).add(respectInsuranceFundFee).add(blackholeFee);
+    uint256 public totalFee = liquidityFee.add(treasuryFee).add(rspctInsuranceFundFee).add(blackholeFee);
     uint256 public feeDenominator = 1000;
 
     uint256 public startTime;
@@ -498,7 +498,7 @@ contract respectct is ERC20Detailed, Ownable {
 
     address public autoLiquidityReceiver;
     address public treasuryReceiver;
-    address public respectsuranceFundReceiver;
+    address public rspctInsuranceFundReceiver;
     address public usdcReceiver;
     address public blackhole;
     address public nftFeeReceiver;
@@ -541,7 +541,7 @@ contract respectct is ERC20Detailed, Ownable {
         }
     }
 
-    constructor() ERC20Detailed("Respect Finance", "respect uint8(DECIMALS)) Ownable() {
+    constructor() ERC20Detailed("Respect Finance", "RSPCT", uint8(DECIMALS)) Ownable() {
         bytes memory bytecode = type(USDCReceiver).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(USDC));
         address receiver;
@@ -560,7 +560,7 @@ contract respectct is ERC20Detailed, Ownable {
       
         autoLiquidityReceiver = 0xce8ACeE54A536B2e14b5B34c30470eef7D45F115;
         treasuryReceiver = 0x025009D6B0Dd556De0266CdfBa4201faaB30119e; 
-        respectInsuranceFundReceiver = 0xF9A64cB8Eb42FeCdcd027B1ceA088aC8f3c71b30;
+        rspctInsuranceFundReceiver = 0xF9A64cB8Eb42FeCdcd027B1ceA088aC8f3c71b30;
         blackhole = DEAD;
         nftFeeReceiver = 0x8A27A021323754D1D95dc9FDe216e3C3Da92f570;
 
@@ -724,7 +724,7 @@ contract respectct is ERC20Detailed, Ownable {
             gonAmount.div(feeDenominator).mul(blackholeFee)
         );
         _gonBalances[address(this)] = _gonBalances[address(this)].add(
-            gonAmount.div(feeDenominator).mul(_treasuryFee.add(respectsuranceFundFee))
+            gonAmount.div(feeDenominator).mul(_treasuryFee.add(rspctInsuranceFundFee))
         );
         _gonBalances[autoLiquidityReceiver] = _gonBalances[autoLiquidityReceiver].add(
             gonAmount.div(feeDenominator).mul(liquidityFee)
@@ -812,8 +812,8 @@ contract respectct is ERC20Detailed, Ownable {
 
         uint256 amountUSDCToTreasuryAndKIF = IERC20(USDC).balanceOf(address(this)).sub(balanceBefore);
 
-        IERC20(USDC).transfer(treasuryReceiver, amountUSDCToTreasuryAndKIF.mul(treasuryFee).div(treasuryFee.add(respectsuranceFundFee)));
-        IERC20(USDC).transfer(respectsuranceFundReceiver, amountUSDCToTreasuryAndKIF.mul(respectsuranceFundFee).div(treasuryFee.add(respectsuranceFundFee)));
+        IERC20(USDC).transfer(treasuryReceiver, amountUSDCToTreasuryAndKIF.mul(treasuryFee).div(treasuryFee.add(rspctInsuranceFundFee)));
+        IERC20(USDC).transfer(rspctInsuranceFundReceiver, amountUSDCToTreasuryAndKIF.mul(rspctInsuranceFundFee).div(treasuryFee.add(rspctInsuranceFundFee)));
     }
 
     function withdrawAllToTreasury() external swapping onlyOwner {
@@ -976,13 +976,13 @@ contract respectct is ERC20Detailed, Ownable {
     function setFeeReceivers(
         address _autoLiquidityReceiver,
         address _treasuryReceiver,
-        address _respectsuranceFundReceiver,
+        address _rspctInsuranceFundReceiver,
         address _blackhole,
         address _nftFeeReceiver
     ) external onlyOwner {
         autoLiquidityReceiver = _autoLiquidityReceiver;
         treasuryReceiver = _treasuryReceiver;
-        respectsuranceFundReceiver = _respectsuranceFundReceiver;
+        rspctInsuranceFundReceiver = _rspctInsuranceFundReceiver;
         blackhole = _blackhole;
         nftFeeReceiver = _nftFeeReceiver;
     }
