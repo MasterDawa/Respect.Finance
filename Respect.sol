@@ -1,28 +1,24 @@
 /*
-KKKKKKKKK    KKKKKKKRRRRRRRRRRRRRRRRR   IIIIIIIIII     OOOOOOOOO        SSSSSSSSSSSSSSS 
-K:::::::K    K:::::KR::::::::::::::::R  I::::::::I   OO:::::::::OO    SS:::::::::::::::S
-K:::::::K    K:::::KR::::::RRRRRR:::::R I::::::::I OO:::::::::::::OO S:::::SSSSSS::::::S
-K:::::::K   K::::::KRR:::::R     R:::::RII::::::IIO:::::::OOO:::::::OS:::::S     SSSSSSS
-KK::::::K  K:::::KKK  R::::R     R:::::R  I::::I  O::::::O   O::::::OS:::::S            
-  K:::::K K:::::K     R::::R     R:::::R  I::::I  O:::::O     O:::::OS:::::S            
-  K::::::K:::::K      R::::RRRRRR:::::R   I::::I  O:::::O     O:::::O S::::SSSS         
-  K:::::::::::K       R:::::::::::::RR    I::::I  O:::::O     O:::::O  SS::::::SSSSS    
-  K:::::::::::K       R::::RRRRRR:::::R   I::::I  O:::::O     O:::::O    SSS::::::::SS  
-  K::::::K:::::K      R::::R     R:::::R  I::::I  O:::::O     O:::::O       SSSSSS::::S 
-  K:::::K K:::::K     R::::R     R:::::R  I::::I  O:::::O     O:::::O            S:::::S
-KK::::::K  K:::::KKK  R::::R     R:::::R  I::::I  O::::::O   O::::::O            S:::::S
-K:::::::K   K::::::KRR:::::R     R:::::RII::::::IIO:::::::OOO:::::::OSSSSSSS     S:::::S
-K:::::::K    K:::::KR::::::R     R:::::RI::::::::I OO:::::::::::::OO S::::::SSSSSS:::::S
-K:::::::K    K:::::KR::::::R     R:::::RI::::::::I   OO:::::::::OO   S:::::::::::::::SS 
-KKKKKKKKK    KKKKKKKRRRRRRRR     RRRRRRRIIIIIIIIII     OOOOOOOOO      SSSSSSSSSSSSSSS  
+RRRRRRRRRRRRRRRRR
+R::::::::::::::::R
+R::::::RRRRRR:::::R
+RR:::::R     R:::::R
+R::::R     R:::::R
+R::::R     R:::::R
+R::::RRRRRR:::::R
+R:::::::::::::RR
+R::::RRRRRR:::::R
+R::::R     R:::::R
+R::::R     R:::::R
+R::::R     R:::::R
+:::::R     R:::::R
+:::::R     R:::::R
+:::::R     R:::::R
+RRRRRRR     RRRRRRR
 
-Krios Finance - Ultra High APY Autocompounding Protocol powered by Cronos
+Respect Finance - Ultra High APY Autocompounding Protocol powered by Cronos
 
-Website: https://krios.finance
-
-Telegram: https://t.me/KriosFinancePortal
-
-Discord: https://discord.gg/zzFZYNSbD9
+Website: https://respect.finance
 
 */
 
@@ -452,7 +448,7 @@ contract USDCReceiver is Ownable {
     }
 }
 
-contract Krios is ERC20Detailed, Ownable {
+contract respectct is ERC20Detailed, Ownable {
 
     using SafeMath for uint256;
     using SafeMathInt for int256;
@@ -460,8 +456,8 @@ contract Krios is ERC20Detailed, Ownable {
     event LogRebase(uint256 indexed epoch, uint256 totalSupply);
     event SwapEnabled();
 
-    string public _name = "Krios Finance";
-    string public _symbol = "KRI";
+    string public _name = "respect Finance";
+    string public _symbol = "respect
     uint8 public _decimals = 5;
 
     IPancakeSwapPair public pairContract;
@@ -483,11 +479,11 @@ contract Krios is ERC20Detailed, Ownable {
 
     uint256 public liquidityFee = 50;
     uint256 public treasuryFee = 30;
-    uint256 public kriInsuranceFundFee = 50;
+    uint256 public respInsuranceFundFee = 50;
     uint256 public sellFee = 20;
     uint256 public blackholeFee = 10;
     uint256 public nftFee = 20;
-    uint256 public totalFee = liquidityFee.add(treasuryFee).add(kriInsuranceFundFee).add(blackholeFee);
+    uint256 public totalFee = liquidityFee.add(treasuryFee).add(respectInsuranceFundFee).add(blackholeFee);
     uint256 public feeDenominator = 1000;
 
     uint256 public startTime;
@@ -502,7 +498,7 @@ contract Krios is ERC20Detailed, Ownable {
 
     address public autoLiquidityReceiver;
     address public treasuryReceiver;
-    address public kriInsuranceFundReceiver;
+    address public respectsuranceFundReceiver;
     address public usdcReceiver;
     address public blackhole;
     address public nftFeeReceiver;
@@ -545,7 +541,7 @@ contract Krios is ERC20Detailed, Ownable {
         }
     }
 
-    constructor() ERC20Detailed("Krios Finance", "KRI", uint8(DECIMALS)) Ownable() {
+    constructor() ERC20Detailed("Respect Finance", "respect uint8(DECIMALS)) Ownable() {
         bytes memory bytecode = type(USDCReceiver).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(USDC));
         address receiver;
@@ -562,11 +558,11 @@ contract Krios is ERC20Detailed, Ownable {
             address(this)
         );
       
-        autoLiquidityReceiver = 0x53f1B48e869cdF3491917d5b6043455EE86f4a80;
-        treasuryReceiver = 0xcCfb8cD310f19924E108Da3D23042555F8a2a79E; 
-        kriInsuranceFundReceiver = 0x8c2eA04765034B77f13509dBe7fB2F28B0C62df8;
+        autoLiquidityReceiver = 0xce8ACeE54A536B2e14b5B34c30470eef7D45F115;
+        treasuryReceiver = 0x025009D6B0Dd556De0266CdfBa4201faaB30119e; 
+        respectInsuranceFundReceiver = 0xF9A64cB8Eb42FeCdcd027B1ceA088aC8f3c71b30;
         blackhole = DEAD;
-        nftFeeReceiver = 0xbA33bC9F7d5B98e6F44947971F0F00233b1E5937;
+        nftFeeReceiver = 0x8A27A021323754D1D95dc9FDe216e3C3Da92f570;
 
         _allowedFragments[address(this)][address(router)] = uint256(-1);
         pairAddress = pair;
@@ -728,7 +724,7 @@ contract Krios is ERC20Detailed, Ownable {
             gonAmount.div(feeDenominator).mul(blackholeFee)
         );
         _gonBalances[address(this)] = _gonBalances[address(this)].add(
-            gonAmount.div(feeDenominator).mul(_treasuryFee.add(kriInsuranceFundFee))
+            gonAmount.div(feeDenominator).mul(_treasuryFee.add(respectsuranceFundFee))
         );
         _gonBalances[autoLiquidityReceiver] = _gonBalances[autoLiquidityReceiver].add(
             gonAmount.div(feeDenominator).mul(liquidityFee)
@@ -816,14 +812,14 @@ contract Krios is ERC20Detailed, Ownable {
 
         uint256 amountUSDCToTreasuryAndKIF = IERC20(USDC).balanceOf(address(this)).sub(balanceBefore);
 
-        IERC20(USDC).transfer(treasuryReceiver, amountUSDCToTreasuryAndKIF.mul(treasuryFee).div(treasuryFee.add(kriInsuranceFundFee)));
-        IERC20(USDC).transfer(kriInsuranceFundReceiver, amountUSDCToTreasuryAndKIF.mul(kriInsuranceFundFee).div(treasuryFee.add(kriInsuranceFundFee)));
+        IERC20(USDC).transfer(treasuryReceiver, amountUSDCToTreasuryAndKIF.mul(treasuryFee).div(treasuryFee.add(respectsuranceFundFee)));
+        IERC20(USDC).transfer(respectsuranceFundReceiver, amountUSDCToTreasuryAndKIF.mul(respectsuranceFundFee).div(treasuryFee.add(respectsuranceFundFee)));
     }
 
     function withdrawAllToTreasury() external swapping onlyOwner {
 
         uint256 amountToSwap = _gonBalances[address(this)].div(_gonsPerFragment);
-        require( amountToSwap > 0,"There is no Krios deposited in token contract");
+        require( amountToSwap > 0,"There is no respect deposited in token contract");
         address[] memory path = new address[](2);
         path[0] = address(this);
         path[1] = USDC;
@@ -980,13 +976,13 @@ contract Krios is ERC20Detailed, Ownable {
     function setFeeReceivers(
         address _autoLiquidityReceiver,
         address _treasuryReceiver,
-        address _kriInsuranceFundReceiver,
+        address _respectsuranceFundReceiver,
         address _blackhole,
         address _nftFeeReceiver
     ) external onlyOwner {
         autoLiquidityReceiver = _autoLiquidityReceiver;
         treasuryReceiver = _treasuryReceiver;
-        kriInsuranceFundReceiver = _kriInsuranceFundReceiver;
+        respectsuranceFundReceiver = _respectsuranceFundReceiver;
         blackhole = _blackhole;
         nftFeeReceiver = _nftFeeReceiver;
     }
